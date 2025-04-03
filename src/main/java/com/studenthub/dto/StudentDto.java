@@ -1,10 +1,12 @@
 package com.studenthub.dto;
 
+import java.math.BigDecimal;
+
 public class StudentDto {
     private int id;
     private String name;
     private String address;
-    private double cgpa;
+    private BigDecimal cgpa;
     private int rollno;
     private String department;
 
@@ -32,11 +34,11 @@ public class StudentDto {
         this.address = address;
     }
 
-    public double getCgpa() {
+    public BigDecimal getCgpa() {
         return cgpa;
     }
 
-    public void setCgpa(double cgpa) {
+    public void setCgpa(BigDecimal cgpa) {
         this.cgpa = cgpa;
     }
 
@@ -59,7 +61,7 @@ public class StudentDto {
     public StudentDto() {
     }
 
-    public StudentDto(int id, String name, String address, double cgpa, int rollno, String department) {
+    public StudentDto(int id, String name, String address, BigDecimal cgpa, int rollno, String department) {
         this.id = id;
         this.name = name;
         this.address = address;
