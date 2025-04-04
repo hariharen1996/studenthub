@@ -7,4 +7,5 @@ import com.studenthub.dto.StudentDto;
 public interface StudentDao {
     void insert(StudentDto studentDto);
     void insert(List<StudentDto> students);
+    boolean deleteRecordByRollNo(int rollNo);
 }

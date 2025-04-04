@@ -37,4 +37,12 @@ public class StudentDaoImpl implements StudentDao {
 
         System.out.println("batch update completed");
     }
+
+    @Override
+    public boolean deleteRecordByRollNo(int rollNo){
+        String sql = "delete from student where rollno = ?";
+        int rowsDeleted = jdbcTemplate.update(sql,rollNo);
+        System.out.println("Number of rows deleted: " + rowsDeleted);
+        return rowsDeleted == 1;
+    }
 }

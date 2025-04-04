@@ -3,7 +3,7 @@ package com.studenthub;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.studenthub.dao.StudentDaoHelper;
+import com.studenthub.dao.StudentDaoImpl;
 
 public class App 
 {
@@ -12,8 +12,9 @@ public class App
         ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
         System.out.println("application context initialized");
         
-        StudentDaoHelper daoHelper = context.getBean("studentDaoHelper",StudentDaoHelper.class);
-        daoHelper.setupStudentTable();
+        StudentDaoImpl studentDaoImpl = context.getBean("studentDaoImpl",StudentDaoImpl.class);
+        studentDaoImpl.deleteRecordByRollNo(003);
+        
 
         ((ClassPathXmlApplicationContext)context).close();
         System.out.println("application context closed");
