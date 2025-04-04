@@ -61,8 +61,7 @@ public class StudentDto {
     public StudentDto() {
     }
 
-    public StudentDto(int id, String name, String address, BigDecimal cgpa, int rollno, String department) {
-        this.id = id;
+    public StudentDto(String name, String address, BigDecimal cgpa, int rollno, String department) {
         this.name = name;
         this.address = address;
         this.cgpa = cgpa;

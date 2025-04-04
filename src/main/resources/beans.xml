@@ -20,8 +20,12 @@
         <property name="dataSource" ref="dataSource" />
     </bean>
 
-      <bean id="h2Console" class="org.h2.tools.Server" factory-method="createWebServer">
+    <bean id="h2Console" class="org.h2.tools.Server" factory-method="createWebServer">
         <constructor-arg value="-web,-webAllowOthers,-webPort,8080"/>
+    </bean>
+
+    <bean id="studentDaoImpl" class="com.studenthub.dao.StudentDaoImpl">
+        <property name="jdbcTemplate" ref="jdbcTemplate" />
     </bean>
 
 </beans>
