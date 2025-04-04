@@ -13,7 +13,9 @@ public class App
         System.out.println("application context initialized");
         
         StudentDaoImpl studentDaoImpl = context.getBean("studentDaoImpl",StudentDaoImpl.class);
-        studentDaoImpl.deleteRecordByRollNo(003);
+        studentDaoImpl.deleteRecordByNameOrAddress("sathya","blrr");
+
+        studentDaoImpl.cleanUp();
         
 
         ((ClassPathXmlApplicationContext)context).close();

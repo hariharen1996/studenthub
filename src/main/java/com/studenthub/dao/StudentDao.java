@@ -8,4 +8,5 @@ public interface StudentDao {
     void insert(StudentDto studentDto);
     void insert(List<StudentDto> students);
     boolean deleteRecordByRollNo(int rollNo);
+    int deleteRecordByNameOrAddress(String name,String address);
 }

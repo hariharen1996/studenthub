@@ -45,4 +45,18 @@ public class StudentDaoImpl implements StudentDao {
         System.out.println("Number of rows deleted: " + rowsDeleted);
         return rowsDeleted == 1;
     }
+
+    @Override
+    public int deleteRecordByNameOrAddress(String name, String address) {
+        String sql = "delete from student where name = ? or address = ?";
+        int rowsDeleted = jdbcTemplate.update(sql,name,address);
+        System.out.println("Number of rows deleted: " + rowsDeleted);
+        return rowsDeleted;
+    }
+
+    public void cleanUp(){
+        String sql = "truncate table student";
+        jdbcTemplate.update(sql);
+        System.out.println("data deleted from table --- cleaned up");
+    }
 }
