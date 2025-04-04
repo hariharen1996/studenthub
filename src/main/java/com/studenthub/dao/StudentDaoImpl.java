@@ -92,4 +92,13 @@ public class StudentDaoImpl implements StudentDao {
         Map<String, List<String>> students = jdbcTemplate.query(sql, new StudentAddrResultSetExtractor());
         return students;
     }
+
+    @Override
+    public int updateStudent(StudentDto studentDto) {
+        String sql = "update student set address = ? where rollno = ?";
+        Object[] studentData = {studentDto.getAddress(),studentDto.getRollno()};
+        int rowsUpdated = jdbcTemplate.update(sql, studentData);
+        System.out.println("rows updated: " + rowsUpdated);
+        return rowsUpdated;
+    }
 }
