@@ -3,6 +3,7 @@ package com.studenthub.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.studenthub.dto.StudentDto;
@@ -64,14 +65,14 @@ public class StudentDaoImpl implements StudentDao {
     @Override
     public List<StudentDto> findAllStudents() {
        String sql = "select * from student";
-       List<StudentDto> allStudents = jdbcTemplate.query(sql, new StudentRowMapper());
+       List<StudentDto> allStudents = jdbcTemplate.query(sql, new BeanPropertyRowMapper<StudentDto>(StudentDto.class));
        return allStudents;
     }
 
     @Override
     public StudentDto findStudentByRollNo(int rollNo) {
        String sql = "select * from student where rollno = ?";
-       StudentDto student = jdbcTemplate.queryForObject(sql, new StudentRowMapper(),rollNo);
+       StudentDto student = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<StudentDto>(StudentDto.class),rollNo);
        return student;
     }
 }

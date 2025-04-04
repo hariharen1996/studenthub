@@ -16,15 +16,15 @@ public class App
         ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
         System.out.println("application context initialized");
         
-        StudentDaoHelper studentDaoHelper = context.getBean("studentDaoHelper",StudentDaoHelper.class);
-        studentDaoHelper.setupStudentTable();
+        // StudentDaoHelper studentDaoHelper = context.getBean("studentDaoHelper",StudentDaoHelper.class);
+        // studentDaoHelper.setupStudentTable();
       
         StudentDaoImpl studentDaoImpl = context.getBean("studentDaoImpl",StudentDaoImpl.class);
         List<StudentDto> students =  studentDaoImpl.findAllStudents();
         System.out.println(students);
         
-        System.out.println("retrieve student roll number 5");
-        StudentDto getByRollNo = studentDaoImpl.findStudentByRollNo(005);
+        System.out.println("retrieve student roll number 3");
+        StudentDto getByRollNo = studentDaoImpl.findStudentByRollNo(003);
         System.out.println(getByRollNo);
 
         ((ClassPathXmlApplicationContext)context).close();
