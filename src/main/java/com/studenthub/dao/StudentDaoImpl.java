@@ -2,11 +2,14 @@ package com.studenthub.dao;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.studenthub.dto.StudentDto;
+import com.studenthub.resultsetextractor.StudentAddrResultSetExtractor;
+import com.studenthub.resultsetextractor.StudentResultSetExtractor;
 import com.studenthub.rowmapper.StudentRowMapper;
 
 public class StudentDaoImpl implements StudentDao {
@@ -74,5 +77,19 @@ public class StudentDaoImpl implements StudentDao {
        String sql = "select * from student where rollno = ?";
        StudentDto student = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<StudentDto>(StudentDto.class),rollNo);
        return student;
+    }
+
+    @Override
+    public List<StudentDto> findStudentByName(String name) {
+       String sql = "select * from student where name = ?";
+       List<StudentDto> student = jdbcTemplate.query(sql, new StudentResultSetExtractor(),name);
+       return student;
+    }
+
+    @Override
+    public Map<String, List<String>> groupStudentByAddress() {
+        String sql = "select * from student";
+        Map<String, List<String>> students = jdbcTemplate.query(sql, new StudentAddrResultSetExtractor());
+        return students;
     }
 }
