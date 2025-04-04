@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.studenthub.dto.StudentDto;
+import com.studenthub.rowmapper.StudentRowMapper;
 
 public class StudentDaoImpl implements StudentDao {
       
@@ -58,5 +59,19 @@ public class StudentDaoImpl implements StudentDao {
         String sql = "truncate table student";
         jdbcTemplate.update(sql);
         System.out.println("data deleted from table --- cleaned up");
+    }
+
+    @Override
+    public List<StudentDto> findAllStudents() {
+       String sql = "select * from student";
+       List<StudentDto> allStudents = jdbcTemplate.query(sql, new StudentRowMapper());
+       return allStudents;
+    }
+
+    @Override
+    public StudentDto findStudentByRollNo(int rollNo) {
+       String sql = "select * from student where rollno = ?";
+       StudentDto student = jdbcTemplate.queryForObject(sql, new StudentRowMapper(),rollNo);
+       return student;
     }
 }
