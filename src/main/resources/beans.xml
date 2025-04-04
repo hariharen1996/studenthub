@@ -28,4 +28,8 @@
         <property name="jdbcTemplate" ref="jdbcTemplate" />
     </bean>
 
+    <bean id="studentDaoHelper" class="com.studenthub.dao.StudentDaoHelper">
+        <property name="StudentDao" ref="studentDaoImpl" />
+    </bean>
+
 </beans>
