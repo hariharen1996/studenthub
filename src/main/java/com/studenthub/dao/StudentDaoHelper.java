@@ -15,8 +15,16 @@ public class StudentDaoHelper {
 
     public void setupStudentTable(){
 
-        StudentDto ram = new StudentDto("ram","madurai",BigDecimal.valueOf(8.00),6,"IT");
-        System.out.println("updating single students data");
-        studentDao.updateStudent(ram);
+        StudentDto renu = new StudentDto("renu","hyd",BigDecimal.valueOf(8.50),9,"IT");
+        StudentDto menu = new StudentDto("menu","cmb",BigDecimal.valueOf(5.00),10,"CSE");
+        StudentDto banu = new StudentDto("banu","blro",BigDecimal.valueOf(6.80),11,"Civil");
+       
+        ArrayList<StudentDto> students = new ArrayList<>();
+
+        students.add(renu);
+        students.add(menu);
+        students.add(banu);
+    
+        studentDao.updateStudent(students);
     }
 }

@@ -1,16 +1,19 @@
 package com.studenthub.dao;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.studenthub.dto.StudentDto;
 import com.studenthub.resultsetextractor.StudentAddrResultSetExtractor;
 import com.studenthub.resultsetextractor.StudentResultSetExtractor;
-import com.studenthub.rowmapper.StudentRowMapper;
 
 public class StudentDaoImpl implements StudentDao {
       
@@ -100,5 +103,26 @@ public class StudentDaoImpl implements StudentDao {
         int rowsUpdated = jdbcTemplate.update(sql, studentData);
         System.out.println("rows updated: " + rowsUpdated);
         return rowsUpdated;
+    }
+
+    @Transactional
+    @Override
+    public int updateStudent(List<StudentDto> studentLists) {
+        String sql = "update student set address = ? where rollno = ?";
+        jdbcTemplate.batchUpdate(sql,new BatchPreparedStatementSetter(){
+
+            @Override
+            public void setValues(PreparedStatement ps, int i) throws SQLException {
+                ps.setString(1, studentLists.get(i).getAddress());
+                ps.setInt(2, studentLists.get(i).getRollno());
+            }
+
+            @Override
+            public int getBatchSize() {
+                return studentLists.size();
+            } 
+        });
+
+        return 0;
     }
 }

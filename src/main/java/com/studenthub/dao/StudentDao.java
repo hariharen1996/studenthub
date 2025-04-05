@@ -15,4 +15,5 @@ public interface StudentDao {
     List<StudentDto> findStudentByName(String name);
     Map<String,List<String>> groupStudentByAddress();
     int updateStudent(StudentDto studentDto);
+    int updateStudent(List<StudentDto> studentLists);   
 }
