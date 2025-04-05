@@ -3,10 +3,29 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.studenthub</groupId>
   <artifactId>studenthub</artifactId>
-  <packaging>jar</packaging>
+  <packaging>war</packaging>
   <version>1.0-SNAPSHOT</version>
   <name>studenthub</name>
   <url>http://maven.apache.org</url>
+<build>
+  <plugins>
+    <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-war-plugin</artifactId>
+      <version>3.4.0</version>
+    </plugin>
+    
+    <plugin>
+      <groupId>org.apache.tomcat.maven</groupId>
+      <artifactId>tomcat7-maven-plugin</artifactId>
+      <version>2.2</version>
+      <configuration>
+        <path>/</path>
+        <port>8080</port>
+      </configuration>
+    </plugin>
+  </plugins>
+</build>
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
@@ -29,5 +48,17 @@
         <artifactId>h2</artifactId>
         <version>2.2.224</version>
     </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-webmvc</artifactId>
+      <version>5.3.23</version>
+    </dependency>
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <version>4.0.1</version>
+      <scope>provided</scope>
+    </dependency>
+
   </dependencies>
 </project>

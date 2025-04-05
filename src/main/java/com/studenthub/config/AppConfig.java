@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import java.sql.SQLException;
 
@@ -16,6 +17,7 @@ import org.h2.tools.Server;
 @Configuration
 @ComponentScan(value = "com.studenthub")
 @PropertySource("classpath:application.properties")
+@EnableWebMvc
 public class AppConfig {
 
     @Value("${db.url}")
