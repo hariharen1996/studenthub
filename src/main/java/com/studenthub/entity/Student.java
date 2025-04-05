@@ -1,8 +1,8 @@
-package com.studenthub.dto;
+package com.studenthub.entity;
 
 import java.math.BigDecimal;
 
-public class StudentDto {
+public class Student {
     private int id;
     private String name;
     private String address;
@@ -58,10 +58,10 @@ public class StudentDto {
         this.department = department;
     }
 
-    public StudentDto() {
+    public Student() {
     }
 
-    public StudentDto(String name, String address, BigDecimal cgpa, int rollno, String department) {
+    public Student(String name, String address, BigDecimal cgpa, int rollno, String department) {
         this.name = name;
         this.address = address;
         this.cgpa = cgpa;

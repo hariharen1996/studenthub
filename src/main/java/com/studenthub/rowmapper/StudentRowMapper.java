@@ -5,22 +5,22 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import com.studenthub.dto.StudentDto;
+import com.studenthub.entity.Student;
 
-public class StudentRowMapper implements RowMapper<StudentDto> {
+public class StudentRowMapper implements RowMapper<Student> {
 
     @Override
-    public StudentDto mapRow(ResultSet rs, int rowNum) throws SQLException {
-        StudentDto studentDto = new StudentDto();
-        studentDto.setName(rs.getString("name"));
-        studentDto.setAddress(rs.getString("address"));
-        studentDto.setCgpa(rs.getBigDecimal("cgpa"));
-        studentDto.setRollno(rs.getInt("rollno"));
-        studentDto.setDepartment(rs.getString("department"));
+    public Student mapRow(ResultSet rs, int rowNum) throws SQLException {
+        Student student = new Student();
+        student.setName(rs.getString("name"));
+        student.setAddress(rs.getString("address"));
+        student.setCgpa(rs.getBigDecimal("cgpa"));
+        student.setRollno(rs.getInt("rollno"));
+        student.setDepartment(rs.getString("department"));
 
         System.out.println("rowmapper");
         
-        return studentDto;
+        return student;
     }
     
 }

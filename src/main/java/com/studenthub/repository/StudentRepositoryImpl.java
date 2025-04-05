@@ -1,4 +1,4 @@
-package com.studenthub.dao;
+package com.studenthub.repository;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -13,12 +13,12 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.studenthub.dto.StudentDto;
+import com.studenthub.entity.Student;
 import com.studenthub.resultsetextractor.StudentAddrResultSetExtractor;
 import com.studenthub.resultsetextractor.StudentResultSetExtractor;
 
 @Repository
-public class StudentDaoImpl implements StudentDao {
+public class StudentRepositoryImpl implements StudentRepository {
       
     private JdbcTemplate jdbcTemplate;
 
@@ -28,20 +28,20 @@ public class StudentDaoImpl implements StudentDao {
     }
     
     @Override
-    public void insert(StudentDto studentDto){
+    public void insert(Student student){
         String sql = "insert into student(name,address,cgpa,rollno,department) values(?,?,?,?,?)";
-        Object[] args = {studentDto.getName(),studentDto.getAddress(),studentDto.getCgpa(),studentDto.getRollno(),studentDto.getDepartment()};
+        Object[] args = {student.getName(),student.getAddress(),student.getCgpa(),student.getRollno(),student.getDepartment()};
         int rowsInserted = jdbcTemplate.update(sql, args);
         System.out.println("rows inserted: " + rowsInserted);
     }
 
     @Override
-    public void insert(List<StudentDto> students){
+    public void insert(List<Student> students){
         String sql = "insert into student(name,address,cgpa,rollno,department) values(?,?,?,?,?)";
         ArrayList<Object[]> studenList = new ArrayList<>();
         
-        for(StudentDto studentDto: students){
-            Object[] studentData = {studentDto.getName(),studentDto.getAddress(),studentDto.getCgpa(),studentDto.getRollno(),studentDto.getDepartment()};
+        for(Student student: students){
+            Object[] studentData = {student.getName(),student.getAddress(),student.getCgpa(),student.getRollno(),student.getDepartment()};
             studenList.add(studentData);
         }
 
@@ -73,23 +73,23 @@ public class StudentDaoImpl implements StudentDao {
     }
 
     @Override
-    public List<StudentDto> findAllStudents() {
+    public List<Student> findAllStudents() {
        String sql = "select * from student";
-       List<StudentDto> allStudents = jdbcTemplate.query(sql, new BeanPropertyRowMapper<StudentDto>(StudentDto.class));
+       List<Student> allStudents = jdbcTemplate.query(sql, new BeanPropertyRowMapper<Student>(Student.class));
        return allStudents;
     }
 
     @Override
-    public StudentDto findStudentByRollNo(int rollNo) {
+    public Student findStudentByRollNo(int rollNo) {
        String sql = "select * from student where rollno = ?";
-       StudentDto student = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<StudentDto>(StudentDto.class),rollNo);
+       Student student = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<Student>(Student.class),rollNo);
        return student;
     }
 
     @Override
-    public List<StudentDto> findStudentByName(String name) {
+    public List<Student> findStudentByName(String name) {
        String sql = "select * from student where name = ?";
-       List<StudentDto> student = jdbcTemplate.query(sql, new StudentResultSetExtractor(),name);
+       List<Student> student = jdbcTemplate.query(sql, new StudentResultSetExtractor(),name);
        return student;
     }
 
@@ -101,9 +101,9 @@ public class StudentDaoImpl implements StudentDao {
     }
 
     @Override
-    public int updateStudent(StudentDto studentDto) {
+    public int updateStudent(Student student) {
         String sql = "update student set address = ? where rollno = ?";
-        Object[] studentData = {studentDto.getAddress(),studentDto.getRollno()};
+        Object[] studentData = {student.getAddress(),student.getRollno()};
         int rowsUpdated = jdbcTemplate.update(sql, studentData);
         System.out.println("rows updated: " + rowsUpdated);
         return rowsUpdated;
@@ -111,7 +111,7 @@ public class StudentDaoImpl implements StudentDao {
 
     @Transactional
     @Override
-    public int updateStudent(List<StudentDto> studentLists) {
+    public int updateStudent(List<Student> studentLists) {
         String sql = "update student set address = ? where rollno = ?";
         jdbcTemplate.batchUpdate(sql,new BatchPreparedStatementSetter(){
 

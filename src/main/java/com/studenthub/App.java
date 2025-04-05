@@ -6,9 +6,9 @@ import java.util.Map;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import com.studenthub.config.AppConfig;
-import com.studenthub.dao.StudentDaoHelper;
-import com.studenthub.dao.StudentDaoImpl;
-import com.studenthub.dto.StudentDto;
+import com.studenthub.entity.Student;
+import com.studenthub.repository.StudentDaoHelper;
+import com.studenthub.repository.StudentRepositoryImpl;
 
 public class App {
     public static void main(String[] args) {
@@ -18,12 +18,12 @@ public class App {
         StudentDaoHelper studentDaoHelper = context.getBean("studentDaoHelper", StudentDaoHelper.class);
         studentDaoHelper.setupStudentTable();
 
-        StudentDaoImpl studentDaoImpl = context.getBean("studentDaoImpl", StudentDaoImpl.class);
-        List<StudentDto> students = studentDaoImpl.findAllStudents();
+        StudentRepositoryImpl studentDaoImpl = context.getBean("studentDaoImpl", StudentRepositoryImpl.class);
+        List<Student> students = studentDaoImpl.findAllStudents();
         System.out.println(students);
 
         System.out.println("retrieve student by name");
-        List<StudentDto> allstudents = studentDaoImpl.findStudentByName("sathya");
+        List<Student> allstudents = studentDaoImpl.findStudentByName("sathya");
         System.out.println(allstudents);
 
         System.out.println("group student by address");
