@@ -6,19 +6,23 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.studenthub.dto.StudentDto;
 import com.studenthub.resultsetextractor.StudentAddrResultSetExtractor;
 import com.studenthub.resultsetextractor.StudentResultSetExtractor;
 
+@Repository
 public class StudentDaoImpl implements StudentDao {
       
     private JdbcTemplate jdbcTemplate;
 
+    @Autowired
     public void setJdbcTemplate(JdbcTemplate jdbcTemplate){
         this.jdbcTemplate = jdbcTemplate;
     }
